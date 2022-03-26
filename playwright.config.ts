@@ -2,6 +2,7 @@ import { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
    testDir: 'tests',
+   reporter: 'list',
    use: {
       baseURL: 'https://www.pokemon.com',
       trace: 'on-first-retry',

@@ -1,8 +1,7 @@
-import { isVisible } from '../common-actions';
 import { BasePage } from './base';
 
 export class HomePage extends BasePage {
-   private selectors = {
+   readonly elements = {
       userDashboard: { searchIcon: '.profile-nav .search' },
       searchPopup: {
          inputField: '#site-search-widget-term',
@@ -15,23 +14,16 @@ export class HomePage extends BasePage {
       await this.page.goto('/us');
    }
 
-   async searchByName(name: string) {
-      await this.page.click(this.selectors.userDashboard.searchIcon);
-      await this.page.waitForSelector(this.selectors.searchPopup.inputField);
-      await this.page.fill(this.selectors.searchPopup.inputField, name);
-      await this.page.click(this.selectors.searchPopup.submitBtn);
+   async searchByText(text: string) {
+      await this.page.click(this.elements.userDashboard.searchIcon);
+      await this.page.waitForSelector(this.elements.searchPopup.inputField);
+      await this.page.fill(this.elements.searchPopup.inputField, text);
+      await this.page.click(this.elements.searchPopup.submitBtn);
+      await this.page.waitForLoadState('networkidle');
    }
 
    async closeCookiePopup() {
-      await this.page.click(this.selectors.coockiePopupCloseBtn);
-      await this.page.waitForSelector(this.selectors.coockiePopupCloseBtn, { state: 'hidden' });
-   }
-
-   async userIsLoggedIn(): Promise<boolean> {
-      return await isVisible(this.page, 'a[routerlink="/editor"]');
-   }
-
-   async goToSettings() {
-      await this.page.click('a[routerlink="/settings"]');
+      await this.page.click(this.elements.coockiePopupCloseBtn);
+      await this.page.waitForSelector(this.elements.coockiePopupCloseBtn, { state: 'hidden' });
    }
 }
