@@ -1,17 +1,23 @@
 import { test } from '@playwright/test';
-import { HomePage } from '../src/pages/home';
-import { SearchResultsPage } from '../src/pages/search-results';
-import { pokemonNames } from '../src/test-data';
+import { PokedexPage } from '../src/pages/pokedex';
+import { pokemons } from '../src/test-data';
 
 test.describe('UI e2e tests, playwright/chromium', () => {
    test(`UI-1 User can navigate to the "Pokedex" and search by "Name"`, async ({ page }) => {
-      const homePage = new HomePage(page);
-      const searchResultsPage = new SearchResultsPage(page);
+      const pokedexPage = new PokedexPage(page);
 
-      await homePage.navigateToPokedex();
-      await homePage.closeCookiePopup();
-      await homePage.searchByText(pokemonNames.pikachu);
+      await pokedexPage.open();
+      await pokedexPage.searchByNameNumber(pokemons.pikachu.name);
+      await pokedexPage.assertSearchResults(pokemons.pikachu);
+   });
 
-      await searchResultsPage.verifySearchResults(pokemonNames.pikachu);
+   test(`UI-2 User can navigate to the "Pokedex" and sort by "Highest Number (First)"`, async ({
+      page,
+   }) => {
+      const pokedexPage = new PokedexPage(page);
+
+      await pokedexPage.open();
+      await pokedexPage.filterResults('Highest Number (First)');
+      await pokedexPage.assertFilterResults();
    });
 });
