@@ -4,9 +4,10 @@ const config: PlaywrightTestConfig = {
    testDir: 'tests',
    reporter: 'list',
    timeout: 60000,
+   workers: 2,
    use: {
       screenshot: 'only-on-failure',
-      baseURL: 'https://www.pokemon.com/us',
+      baseURL: 'https://pokemon.com',
       trace: 'on-first-retry',
       headless: true,
       browserName: 'chromium',

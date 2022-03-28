@@ -20,7 +20,7 @@ export class PokedexPage extends BasePage {
    };
 
    async open() {
-      await this.page.goto('/pokedex');
+      await this.page.goto('/us/pokedex');
       await this.page.waitForLoadState('networkidle');
    }
 
