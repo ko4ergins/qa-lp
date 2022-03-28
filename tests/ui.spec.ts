@@ -1,10 +1,10 @@
 import { test } from '@playwright/test';
-import { HomePage } from '../src/pages/home';
-import { PokedexPage } from '../src/pages/pokedex';
-import { pokemons } from '../src/test-data';
+import * as errMessage from '../src/err-messages';
+import { HomePage, LoginPage, PokedexPage } from '../src/pages';
+import { pokemons, users } from '../src/test-data';
 
 test.describe('UI e2e tests, playwright/chromium', () => {
-   test(`UI-1 Pokedex page, User can search pokemons by "Name"`, async ({ page }) => {
+   test(`UI-1 Pokedex Page, User can search pokemons by "Name"`, async ({ page }) => {
       const pokedexPage = new PokedexPage(page);
 
       await pokedexPage.open();
@@ -12,7 +12,7 @@ test.describe('UI e2e tests, playwright/chromium', () => {
       await pokedexPage.assertSearchResults(pokemons.pikachu);
    });
 
-   test(`UI-2 Pokedex page, User can sort pokemons by "Highest Number (First)"`, async ({
+   test(`UI-2 Pokedex Page, User can sort pokemons by "Highest Number (First)"`, async ({
       page,
    }) => {
       const pokedexPage = new PokedexPage(page);
@@ -29,6 +29,30 @@ test.describe('UI e2e tests, playwright/chromium', () => {
 
       await homePage.open();
       await homePage.closeCookiePopup();
-      await homePage.assertHighlightedSliderItem(pokemons.dewott);
+      await homePage.assertHglSliderItem(pokemons.dewott);
+   });
+
+   test(`UI-4 Home Page, User can select 'Explore More Pokemon' CTA and find Jigglypuff in the hover state of the Pokedex`, async ({
+      page,
+   }) => {
+      const homePage = new HomePage(page);
+      const pokedexPage = new PokedexPage(page);
+
+      await homePage.open();
+      await homePage.closeCookiePopup();
+      await homePage.clickExploreMorePokemonBtn();
+      await pokedexPage.clickLoadMorePokemonBtn();
+      await pokedexPage.assertItemIsInList(pokemons.jigglypuff);
+   });
+
+   test(`UI-5 Home Page, User can not login with invalid credentials`, async ({ page }) => {
+      const homePage = new HomePage(page);
+      const loginPage = new LoginPage(page);
+
+      await homePage.open();
+      await homePage.closeCookiePopup();
+      await homePage.navigateToLoginPage();
+      await loginPage.loginWithCredentials(users.invalid);
+      await loginPage.assertErrorMessage(errMessage.loginWithIncorrectCreds);
    });
 });

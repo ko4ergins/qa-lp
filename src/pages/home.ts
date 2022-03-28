@@ -3,8 +3,11 @@ import { IPokemon } from '../interfaces';
 import { BasePage } from './base';
 
 export class HomePage extends BasePage {
-   readonly selectors = {
-      userDashboard: { searchIcon: this.page.locator('.profile-nav .search') },
+   readonly elements = {
+      userDashboard: {
+         searchIcon: this.page.locator('.profile-nav .search'),
+         loginIcon: this.page.locator('#user-dashboard >> text=Log In'),
+      },
       searchPopup: {
          inputField: this.page.locator('#site-search-widget-term'),
          submitBtn: this.page.locator('#site-search-widget-submit'),
@@ -17,6 +20,7 @@ export class HomePage extends BasePage {
          prevBtn: this.page.locator('.nav-btn.prev'),
          nextBtn: this.page.locator('.nav-btn.next'),
       },
+      exploreMorePokemonBtn: this.page.locator('.slider-more-button a'),
    };
 
    async open() {
@@ -25,13 +29,23 @@ export class HomePage extends BasePage {
    }
 
    async closeCookiePopup() {
-      await this.selectors.coockiePopupCloseBtn.click();
-      await this.selectors.coockiePopupCloseBtn.waitFor({ state: 'hidden' });
+      await this.elements.coockiePopupCloseBtn.click();
+      await this.elements.coockiePopupCloseBtn.waitFor({ state: 'hidden' });
    }
 
-   async assertHighlightedSliderItem(data: IPokemon) {
-      await this.selectors.featuredGallerySlider.hglItemInfo.scrollIntoViewIfNeeded();
-      const pokemonNameNumber = await this.selectors.featuredGallerySlider.hglItemInfo.evaluate(
+   async clickExploreMorePokemonBtn() {
+      await this.elements.exploreMorePokemonBtn.click();
+      await this.page.waitForLoadState('networkidle');
+   }
+
+   async navigateToLoginPage() {
+      await this.elements.userDashboard.loginIcon.click();
+      await this.page.waitForLoadState('networkidle');
+   }
+
+   async assertHglSliderItem(data: IPokemon) {
+      await this.elements.featuredGallerySlider.hglItemInfo.scrollIntoViewIfNeeded();
+      const pokemonNameNumber = await this.elements.featuredGallerySlider.hglItemInfo.evaluate(
          (el) => el.innerText,
       );
 
