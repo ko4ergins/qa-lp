@@ -13,9 +13,3 @@ export interface IUser {
 export interface IUsers {
    [key: string]: IUser;
 }
-
-export interface IApiRes {
-   ok: boolean;
-   json: { [key: string]: any };
-   status: number;
-}

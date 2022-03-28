@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
-import * as errMessage from '../src/err-messages';
-import { HomePage, LoginPage, PokedexPage } from '../src/pages';
-import { pokemons, users } from '../src/test-data';
+import * as errMessage from '../src/ui/err-messages';
+import { HomePage, LoginPage, PokedexPage } from '../src/ui/pages';
+import { pokemons, users } from '../src/ui/test-data';
 
 test.describe('UI e2e tests, playwright/chromium', () => {
    test(`UI-1 Pokedex Page, User can search pokemons by "Name"`, async ({ page }) => {
