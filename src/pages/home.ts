@@ -1,37 +1,56 @@
-import { isVisible } from '../common-actions';
+import { expect } from '@playwright/test';
+import { IPokemon } from '../interfaces';
 import { BasePage } from './base';
 
 export class HomePage extends BasePage {
-   private selectors = {
-      userDashboard: { searchIcon: '.profile-nav .search' },
-      searchPopup: {
-         inputField: '#site-search-widget-term',
-         submitBtn: '#site-search-widget-submit',
+   readonly elements = {
+      userDashboard: {
+         searchIcon: this.page.locator('.profile-nav .search'),
+         loginIcon: this.page.locator('#user-dashboard >> text=Log In'),
       },
-      coockiePopupCloseBtn: '#onetrust-close-btn-container > button',
+      searchPopup: {
+         inputField: this.page.locator('#site-search-widget-term'),
+         submitBtn: this.page.locator('#site-search-widget-submit'),
+      },
+      coockiePopupCloseBtn: this.page.locator('#onetrust-close-btn-container > button'),
+      featuredGallerySlider: {
+         hglItemInfo: this.page.locator(
+            '#pokemon-character-slider .loaded.highlight > .mini-profile > h5',
+         ),
+         prevBtn: this.page.locator('.nav-btn.prev'),
+         nextBtn: this.page.locator('.nav-btn.next'),
+      },
+      exploreMorePokemonBtn: this.page.locator('.slider-more-button a'),
    };
 
-   async navigateToPokedex() {
-      await this.page.goto('/us');
-   }
-
-   async searchByName(name: string) {
-      await this.page.click(this.selectors.userDashboard.searchIcon);
-      await this.page.waitForSelector(this.selectors.searchPopup.inputField);
-      await this.page.fill(this.selectors.searchPopup.inputField, name);
-      await this.page.click(this.selectors.searchPopup.submitBtn);
+   async open() {
+      await this.page.goto('/');
+      await this.page.waitForLoadState('networkidle');
    }
 
    async closeCookiePopup() {
-      await this.page.click(this.selectors.coockiePopupCloseBtn);
-      await this.page.waitForSelector(this.selectors.coockiePopupCloseBtn, { state: 'hidden' });
+      await this.elements.coockiePopupCloseBtn.click();
+      await this.elements.coockiePopupCloseBtn.waitFor({ state: 'hidden' });
    }
 
-   async userIsLoggedIn(): Promise<boolean> {
-      return await isVisible(this.page, 'a[routerlink="/editor"]');
+   async clickExploreMorePokemonBtn() {
+      await this.elements.exploreMorePokemonBtn.click();
+      await this.page.waitForLoadState('networkidle');
    }
 
-   async goToSettings() {
-      await this.page.click('a[routerlink="/settings"]');
+   async navigateToLoginPage() {
+      await this.elements.userDashboard.loginIcon.click();
+      await this.page.waitForLoadState('networkidle');
+   }
+
+   async assertHglSliderItem(data: IPokemon) {
+      await this.elements.featuredGallerySlider.hglItemInfo.scrollIntoViewIfNeeded();
+      const pokemonNameNumber = await this.elements.featuredGallerySlider.hglItemInfo.evaluate(
+         (el) => el.innerText,
+      );
+
+      await expect(pokemonNameNumber.replace(/(?:\r\n|\r|\n)/g, '')).toBe(
+         `${data.name}${data.number.replace('#', '')}`,
+      );
    }
 }

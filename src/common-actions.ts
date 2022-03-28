@@ -1,6 +1,5 @@
-import type { Page } from 'playwright';
-
-export async function isVisible(page: Page, locator: string): Promise<boolean> {
-   await page.waitForSelector(locator);
-   return await page.isVisible(locator);
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+export async function scrollBottom(page) {
+   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
 }
