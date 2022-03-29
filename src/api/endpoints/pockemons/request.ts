@@ -7,11 +7,11 @@ export class PokemonsRequest extends RequestController {
       return { ...res, json: res.json as TPokemons };
    }
 
-   async createPokemon(data) {
-      const res = await this.post('/api/pokemons', { data });
+   async createPokemon(data: Omit<TPokemon, 'id'>) {
+      const res = await this.post('/api/pokemons', data);
       return {
          ...res,
-         json: res.json as { data: Omit<TPokemon, 'id'>; id: string; createdAt: string },
+         json: res.json as Omit<TPokemon, 'id'> & { id: string; createdAt: string },
       };
    }
 }

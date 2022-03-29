@@ -5,6 +5,11 @@ export type TApiErr = Omit<TApiRes, 'json'> & {
    json: { detail: string };
 };
 
+export abstract class BaseRequest {
+   readonly methods = new RequestController(this.request);
+   constructor(private request: APIRequestContext) {}
+}
+
 export class RequestController {
    constructor(private request: APIRequestContext) {}
 
