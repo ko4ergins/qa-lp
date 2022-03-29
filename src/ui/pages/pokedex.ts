@@ -75,6 +75,7 @@ export class PokedexPage extends BasePage {
          pokemonIsVisible = await selector.isVisible();
       }
 
+      await selector.hover();
       await expect(pokemonIsVisible).toBe(true);
    }
 }

@@ -4,15 +4,30 @@ const config: PlaywrightTestConfig = {
    testDir: 'tests',
    reporter: 'list',
    timeout: 60000,
-   workers: 2,
-   use: {
-      screenshot: 'only-on-failure',
-      baseURL: 'https://pokemon.com',
-      trace: 'on-first-retry',
-      headless: true,
-      browserName: 'chromium',
-      ignoreHTTPSErrors: true,
-   },
+   workers: 1,
+   projects: [
+      {
+         name: `UI`,
+         use: {
+            screenshot: 'only-on-failure',
+            baseURL: 'https://pokemon.com',
+            trace: 'on-first-retry',
+            headless: true,
+            browserName: 'chromium',
+            ignoreHTTPSErrors: true,
+         },
+      },
+      {
+         name: `API`,
+         use: {
+            baseURL: 'https://reqres.in',
+            extraHTTPHeaders: {
+               'content-type': 'application/json',
+               'Content-Length': '0',
+            },
+         },
+      },
+   ],
 };
 
 export default config;

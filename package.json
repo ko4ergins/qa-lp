@@ -4,8 +4,11 @@
   "description": "aqa",
   "main": "index.js",
   "scripts": {
-    "test": "npx tsc && npx playwright test",
-    "dep": "npm i; npx playwright install chromium"
+    "plwr": "npx tsc && npx playwright test",
+    "postinstall": "npx playwright install chromium",
+    "test:api": "npm run plwr -- --grep @API --project=API",
+    "test:ui": "npm run plwr -- --grep @UI --project=UI",
+    "test": "npm run test:api; npm run test:ui"
   },
   "keywords": [
     "qa",
