@@ -1,24 +1,27 @@
 import type { APIRequestContext, APIResponse } from 'playwright';
 
-export type IApiRes = { ok: boolean; json: any; status: number };
-export type IApiErr = Omit<IApiRes, 'json'> & {
+export type TApiRes = { ok: boolean; json: any; status: number };
+export type TApiErr = Omit<TApiRes, 'json'> & {
    json: { detail: string };
 };
 
-export class BaseRequest {
+export class RequestController {
    constructor(private request: APIRequestContext) {}
 
-   private async makeRes(data: Pick<APIResponse, 'ok' | 'json' | 'status'>): Promise<IApiRes> {
+   private async handleResult(data: APIResponse): Promise<TApiRes> {
+      let json;
+
       try {
-         return { ok: data.ok(), status: data.status(), json: await data.json() };
-      } catch (e) {
-         throw new Error(e);
+         json = await data.json();
+      } catch (err) {
+         json = { message: 'Received HTML instead JSON', error: err, text: await data.text() };
       }
+
+      return { ok: data.ok(), status: data.status(), json };
    }
 
-   async get(path: string): Promise<IApiRes> {
+   async get(path: string): Promise<TApiRes> {
       const res = await this.request.get(path);
-      console.log(await res.json(), 'QAQAQA');
-      return await this.makeRes({ ...res });
+      return await this.handleResult(res);
    }
 }

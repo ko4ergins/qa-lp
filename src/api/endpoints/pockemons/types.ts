@@ -6,16 +6,14 @@ export type TPokemonInList = {
    pantone_value: string;
 };
 
-export type TPokemonList = {
-   json: {
-      page: number;
-      per_page: number;
-      total: number;
-      total_pages: number;
-      data: TPokemonInList[];
-      support: {
-         url: string;
-         text: string;
-      };
+export type TPokemons = {
+   page: number;
+   per_page: number;
+   total: number;
+   total_pages: number;
+   data: TPokemonInList[];
+   support: {
+      url: string;
+      text: string;
    };
 };
