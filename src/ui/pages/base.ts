@@ -1,4 +1,4 @@
-import type { Page } from 'playwright';
+import type { Page } from '@playwright/test';
 
 export abstract class BasePage {
    constructor(readonly page: Page) {}

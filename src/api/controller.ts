@@ -1,4 +1,4 @@
-import type { APIRequestContext, APIResponse } from 'playwright';
+import type { APIRequestContext, APIResponse } from '@playwright/test';
 
 export type TApiRes = { ok: boolean; json: any; status: number };
 export type TApiErr = Omit<TApiRes, 'json'> & {
