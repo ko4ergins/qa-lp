@@ -1,7 +1,7 @@
-import type { TPokemonInList } from '../pockemons/types';
+import type { TPokemon } from '../pockemons/types';
 
-export type TPokemon = {
-   data: TPokemonInList;
+export type TPokemonId = {
+   data: TPokemon;
    support: {
       url: string;
       text: string;

@@ -1,4 +1,4 @@
-export type TPokemonInList = {
+export type TPokemon = {
    id: number;
    name: string;
    year: number;
@@ -11,7 +11,7 @@ export type TPokemons = {
    per_page: number;
    total: number;
    total_pages: number;
-   data: TPokemonInList[];
+   data: TPokemon[];
    support: {
       url: string;
       text: string;

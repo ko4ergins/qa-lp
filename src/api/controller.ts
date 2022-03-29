@@ -24,4 +24,8 @@ export class RequestController {
       const res = await this.request.get(path);
       return await this.handleResult(res);
    }
+   async post(path: string, payload?: any): Promise<TApiRes> {
+      const res = await this.request.post(path, { data: payload || {} });
+      return await this.handleResult(res);
+   }
 }
