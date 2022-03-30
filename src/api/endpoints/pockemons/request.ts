@@ -8,7 +8,7 @@ export class PokemonsRequest extends RequestController {
    }
 
    async createPokemon(data: Omit<TPokemon, 'id'>) {
-      const res = await this.post('/api/pokemons', data);
+      const res = await this.post('/api/pokemons', { payload: data });
       return {
          ...res,
          json: res.json as Omit<TPokemon, 'id'> & { id: string; createdAt: string },
