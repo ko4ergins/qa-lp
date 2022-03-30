@@ -17,16 +17,6 @@ const config: PlaywrightTestConfig = {
             ignoreHTTPSErrors: true,
          },
       },
-      {
-         name: `API`,
-         use: {
-            baseURL: 'https://reqres.in',
-            extraHTTPHeaders: {
-               'content-type': 'application/json',
-               'Content-Length': '0',
-            },
-         },
-      },
    ],
 };
 

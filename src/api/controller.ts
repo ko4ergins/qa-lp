@@ -1,4 +1,4 @@
-import { APIRequestContext, APIResponse, expect } from '@playwright/test';
+import { APIResponse, expect, request } from '@playwright/test';
 
 export type TApiRes = { message: string; url: string; ok: boolean; json: any; status: number };
 export type TApiErr = Omit<TApiRes, 'json'> & {
@@ -6,7 +6,13 @@ export type TApiErr = Omit<TApiRes, 'json'> & {
 };
 
 export class RequestController {
-   constructor(private request: APIRequestContext) {}
+   private apiContext = {
+      baseURL: 'https://reqres.in',
+      extraHTTPHeaders: {
+         'content-type': 'application/json',
+         'Content-Length': '0',
+      },
+   };
 
    private async handleResult(data: APIResponse, assertErr = true): Promise<TApiRes> {
       const ok = data.ok(),
@@ -36,14 +42,19 @@ export class RequestController {
    }
 
    protected async get(path: string, options?: { assertErr?: boolean }): Promise<TApiRes> {
-      const res = await this.request.get(path);
+      const context = await request.newContext(this.apiContext);
+      const res = await context.get(path);
+
       return await this.handleResult(res, options?.assertErr);
    }
+
    protected async post(
       path: string,
       options?: { payload?: any; assertErr?: boolean },
    ): Promise<TApiRes> {
-      const res = await this.request.post(path, { data: options?.payload || {} });
+      const context = await request.newContext(this.apiContext);
+      const res = await context.post(path, { data: options?.payload || {} });
+
       return await this.handleResult(res, options?.assertErr);
    }
 }
