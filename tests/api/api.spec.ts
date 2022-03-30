@@ -67,4 +67,13 @@ test.describe('@API tests, playwright/request', () => {
          error: 'user not found',
       });
    });
+
+   test(`API-7 GET /pokemons, User can compare two pokemons`, async () => {
+      const { json, message } = await request.pokemons.getPokemons();
+
+      await expect(json.data[0], message).toMatchObject({
+         id: json.data[1].id - 1,
+         name: json.data[1].name,
+      });
+   });
 });
