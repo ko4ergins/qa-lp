@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import { TPokemon } from './endpoints/pockemons/types';
-import { TUserData } from './endpoints/register/types';
+import { TUserData } from './endpoints/users/types';
 
 export function getNewPokemon(): Omit<TPokemon, 'id'> {
    return {
@@ -12,7 +12,7 @@ export function getNewPokemon(): Omit<TPokemon, 'id'> {
 }
 export function getNewUserCreds(): TUserData {
    return {
-      email: `eve.holt@reqres.in`,
+      email: `${crypto.randomBytes(8).toString('hex')}@qa.qa`,
       password: crypto.randomBytes(8).toString('hex'),
    };
 }

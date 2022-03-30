@@ -14,10 +14,17 @@ export class RequestController {
       },
    };
 
-   private async handleResult(data: APIResponse, assertErr = true): Promise<TApiRes> {
+   private async handleResult(
+      data: APIResponse,
+      options: {
+         assertErr?: boolean;
+         method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+      },
+   ): Promise<TApiRes> {
       const ok = data.ok(),
          status = data.status(),
          url = data.url();
+      const assertErr = options.assertErr ?? true;
       let json;
 
       try {
@@ -26,7 +33,9 @@ export class RequestController {
          json = { error: 'received HTML instead JSON', log: err };
       }
 
-      const message = `URL: ${url} STATUS: ${status} JSON: ${JSON.stringify(json, null, 4)}`;
+      const message = `METHOD:${
+         options.method
+      } URL:${url} STATUS:${status} JSON:${JSON.stringify(json, null, 4)}`;
 
       if (assertErr) {
          const errs = ['error', 'errors', 'Error', 'Errors', 'ERROR', 'ERRORS'];
@@ -45,7 +54,7 @@ export class RequestController {
       const context = await request.newContext(this.apiContext);
       const res = await context.get(path);
 
-      return await this.handleResult(res, options?.assertErr);
+      return await this.handleResult(res, { assertErr: options?.assertErr, method: 'GET' });
    }
 
    protected async post(
@@ -55,6 +64,6 @@ export class RequestController {
       const context = await request.newContext(this.apiContext);
       const res = await context.post(path, { data: options?.payload || {} });
 
-      return await this.handleResult(res, options?.assertErr);
+      return await this.handleResult(res, { assertErr: options?.assertErr, method: 'POST' });
    }
 }

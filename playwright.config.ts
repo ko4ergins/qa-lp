@@ -12,7 +12,7 @@ const config: PlaywrightTestConfig = {
             screenshot: 'only-on-failure',
             baseURL: 'https://pokemon.com',
             trace: 'on-first-retry',
-            headless: true,
+            headless: false,
             browserName: 'chromium',
             ignoreHTTPSErrors: true,
          },
