@@ -24,7 +24,7 @@ export class HomePage extends BasePage {
    };
 
    async open() {
-      await this.page.goto('/');
+      await this.page.goto('/us');
       await this.page.waitForLoadState('networkidle');
    }
 
