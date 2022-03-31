@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Run Tests
 
 # Controls when the workflow will run
 on:
@@ -24,4 +24,4 @@ jobs:
         run: doctl auth init
 
       - name: Connect to DigitalOcean droplet
-        run: doctl compute ssh root@ubuntu-s-1vcpu-1gb-ams3-01
+        run: doctl compute ssh root@134.122.59.59
