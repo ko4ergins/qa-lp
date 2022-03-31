@@ -4,17 +4,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  tests:
+  api-ui-tests:
     runs-on: ubuntu-latest # or macos-latest, windows-latest
-    outputs:
-      outputNpmI: ${{ steps.npm_i.outputs.test }}
-      outputNpmTest: ${{ steps.npm_test.outputs.test }}
 
     steps:      
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-         node-version: '16'
+         node-version: '14'
       - id: npm_i
         name: Install dependencies
         run: npm install
