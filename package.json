@@ -4,12 +4,12 @@
    "description": "aqa",
    "main": "index.js",
    "scripts": {
-      "plwr": "npx tsc && npx playwright test",
+      "pretest": "tsc --incremental -p tsconfig.json",
       "postinstall": "npx playwright install chromium",
-      "test:api": "npm run plwr -- --grep @API; npm run test:report",
-      "test:ui": "npm run plwr -- --grep @UI --project=UI; npm run test:report",
-      "test": "npm run plwr; npm run test:report",
-      "test:report": "allure generate ./allure-results -c"
+      "test:api": "npm run test -- --project=API",
+      "test:ui": "npm run test -- --project=UI",
+      "test": "npx playwright test; npm run report",
+      "report": "allure generate ./allure-results -c"
    },
    "keywords": [
       "qa",
