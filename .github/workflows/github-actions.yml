@@ -12,16 +12,12 @@ jobs:
   tests:
     runs-on: ubuntu-latest # or macos-latest, windows-latest
 
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
+    steps:      
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      - name: Log in to DigitalOcean
-        run: doctl auth init
-
-      - name: Connect to DigitalOcean droplet
-        run: doctl compute ssh root@134.122.59.59
+         node-version: '16'
+      - name: Install dependencies
+        run: npm install
+      - name: Run your tests
+        run: npm test
