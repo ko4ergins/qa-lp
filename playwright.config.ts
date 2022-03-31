@@ -1,18 +1,28 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
-   testDir: 'tests',
    reporter: [['allure-playwright'], ['list']],
    timeout: 90000,
-   workers: 1,
+   workers: 3,
+   outputDir: './allure-results',
    use: {
       screenshot: 'only-on-failure',
       baseURL: 'https://pokemon.com',
       trace: 'on-first-retry',
-      headless: false,
+      headless: true,
       browserName: 'chromium',
       ignoreHTTPSErrors: true,
    },
+   projects: [
+      {
+         name: 'API',
+         testDir: './tests/api',
+      },
+      {
+         name: 'UI',
+         testDir: './tests/ui',
+      },
+   ],
 };
 
 export default config;
