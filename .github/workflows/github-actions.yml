@@ -11,6 +11,9 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest # or macos-latest, windows-latest
+    outputs:
+      outputNpmI: ${{ steps.npm_i.outputs.test }}
+      outputNpmTest: ${{ steps.npm_test.outputs.test }}
 
     steps:      
       - uses: actions/checkout@v2
@@ -18,6 +21,8 @@ jobs:
         with:
          node-version: '16'
       - name: Install dependencies
+      - id: npm_i
         run: npm install
-      - name: Run your tests
-        run: npm test
+      - name: Run tests
+      - id: npm_test
+        run: npm run test:api
