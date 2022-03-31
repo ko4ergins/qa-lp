@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest # or macos-latest, windows-latest
 
     steps:      
+      - run: |
+          echo '::set-output name=action_echo::enabled'
+          echo '::echo::on'
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
