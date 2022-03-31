@@ -12,6 +12,7 @@ const config: PlaywrightTestConfig = {
       headless: true,
       browserName: 'chromium',
       ignoreHTTPSErrors: true,
+      launchOptions: { args: ['--disable-dev-shm-usage'] },
    },
    projects: [
       {
