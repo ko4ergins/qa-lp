@@ -6,9 +6,10 @@
    "scripts": {
       "plwr": "npx tsc && npx playwright test",
       "postinstall": "npx playwright install chromium",
-      "test:api": "npm run plwr -- --grep @API",
-      "test:ui": "npm run plwr -- --grep @UI --project=UI",
-      "test": "npm run test:api; npm run test:ui"
+      "test:api": "npm run plwr -- --grep @API; npm run test:report",
+      "test:ui": "npm run plwr -- --grep @UI --project=UI; npm run test:report",
+      "test": "npm run plwr; npm run test:report",
+      "test:report": "allure generate ./allure-results -c"
    },
    "keywords": [
       "qa",
@@ -43,6 +44,7 @@
    "devDependencies": {
       "@types/node": "^17.0.23",
       "@typescript-eslint/eslint-plugin": "^5.16.0",
-      "@typescript-eslint/parser": "^5.16.0"
+      "@typescript-eslint/parser": "^5.16.0",
+      "allure-playwright": "^2.0.0-beta.15"
    }
 }
