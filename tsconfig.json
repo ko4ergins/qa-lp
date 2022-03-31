@@ -14,5 +14,5 @@
       "rootDir": "./",
       "outDir": "./built"
    },
-   "exclude": ["node_modules", "built"]
+   "exclude": ["node_modules", "built", "allure-report", "test-results", "allure-results"]
 }
