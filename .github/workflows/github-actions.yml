@@ -9,21 +9,25 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  e2e-tests:
+  tests:
     runs-on: ubuntu-latest # or macos-latest, windows-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v1
-      
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
+      - name: Log in to DigitalOcean
+        run: doctl auth init
+
+        - name: Connect to DigitalOcean droplet
+        run: doctl compute ssh root@ubuntu-s-1vcpu-1gb-ams3-01
+
       - name: Install dependencies
         run: npm install
-        
+
       - name: Run tests
         run: npm run test
