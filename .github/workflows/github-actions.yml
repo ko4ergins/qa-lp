@@ -23,11 +23,5 @@ jobs:
       - name: Log in to DigitalOcean
         run: doctl auth init
 
-        - name: Connect to DigitalOcean droplet
+      - name: Connect to DigitalOcean droplet
         run: doctl compute ssh root@ubuntu-s-1vcpu-1gb-ams3-01
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm run test
