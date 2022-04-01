@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  api-ui-tests:
+   test:
     runs-on: ubuntu-latest # or macos-latest, windows-latest
 
     steps:      
