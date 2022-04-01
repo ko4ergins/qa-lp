@@ -6,8 +6,8 @@
    "scripts": {
       "pretest": "tsc --incremental -p tsconfig.json",
       "postinstall": "npx playwright install chromium",
-      "test:api": "npm run test -- --project=API; npm run report",
-      "test:ui": "npm run test -- --project=UI; npm run report",
+      "test:api": "npm run test -- --project=API",
+      "test:ui": "npm run test -- --project=UI",
       "test": "npx playwright test",
       "report": "allure generate ./allure-results -c"
    },
