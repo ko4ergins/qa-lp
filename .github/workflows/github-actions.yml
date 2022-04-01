@@ -1,4 +1,4 @@
-name: Run Tests
+name: ☂ run API tests
 
 on:
   workflow_dispatch:
@@ -8,16 +8,11 @@ jobs:
     runs-on: ubuntu-latest # or macos-latest, windows-latest
 
     steps:      
-      - run: |
-          echo '::set-output name=action_echo::enabled'
-          echo '::echo::on'
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v2
         with:
          node-version: '14'
-      - id: npm_i
-        name: Install dependencies
-        run: echo '::debug' && npm install"
-      - id: npm_test
-        name: Run tests
+      - name: install dependencies
+        run: npm install
+      - name: run tests
         run: npm run test:api
