@@ -1,0 +1,20 @@
+name: Run Tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  api-ui-tests:
+    runs-on: ubuntu-latest # or macos-latest, windows-latest
+
+    steps:      
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+         node-version: '14'
+      - id: npm_i
+        name: Install dependencies
+        run:  npm install"
+      - id: npm_test
+        name: Run tests
+        run: npm run test:api
