@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 jobs:
-   test:
-    runs-on: ubuntu-latest # or macos-latest, windows-latest
+   api-test:
+    runs-on: ubuntu-latest
 
     steps:      
       - uses: actions/checkout@v2
@@ -16,3 +16,9 @@ jobs:
         run: npm install
       - name: run tests
         run: npm run test:api
+        continue-on-error: true
+      - name: Send Results and Generate Allure Report
+        uses: Xotabu4/send-to-allure-server-action@1
+        if: ${{ always() }}
+        with:
+          allure-server-url: 'http://my-allure-server.com:5001/'
