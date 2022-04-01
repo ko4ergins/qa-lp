@@ -17,7 +17,7 @@ jobs:
          node-version: '14'
       - id: npm_i
         name: Install dependencies
-        run: npm install
+        run: echo '::debug' && npm install"
       - id: npm_test
         name: Run tests
         run: npm run test:api
