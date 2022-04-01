@@ -7,18 +7,13 @@ jobs:
    api-test:
     runs-on: ubuntu-latest
 
-    steps:      
+    steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
-         node-version: '14'
+         node-version: '16'
       - name: install dependencies
         run: npm install
       - name: run tests
         run: npm run test:api
         continue-on-error: true
-      - name: Send Results and Generate Allure Report
-        uses: Xotabu4/send-to-allure-server-action@1
-        if: ${{ always() }}
-        with:
-          allure-server-url: 'http://my-allure-server.com:5001/'

@@ -1,10 +1,10 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
-   reporter: [['allure-playwright'], ['list']],
+   reporter: [['html', { open: 'never', outputFolder: './report/index' }], ['list']],
    timeout: 90000,
-   workers: 3,
-   outputDir: './allure-results',
+   workers: 1,
+   outputDir: './report',
    use: {
       screenshot: 'only-on-failure',
       baseURL: 'https://pokemon.com',

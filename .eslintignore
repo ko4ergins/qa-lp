@@ -2,5 +2,4 @@
 .env
 node_modules/
 built/
-allure-results/
-allure-report/
+report/
