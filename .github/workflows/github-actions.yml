@@ -15,4 +15,4 @@ jobs:
       - name: Build docker image
         run: docker build -t img-tst .
       - name: Run tests
-        run: docker run -v /home/report:/app/report/index -t img-tst:latest
+        run: docker run -v /home/report:/app/report/-t img-tst:latest
