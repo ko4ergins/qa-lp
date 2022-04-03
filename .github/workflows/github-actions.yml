@@ -3,6 +3,9 @@ name: ☂ api/ui auto tests
 on:
   workflow_dispatch:
 
+env:
+  RUN_ID: ${{ github.run_number }}-${{ github.run_attempt }}
+
 jobs:
    tests-execution:
     runs-on: self-hosted
@@ -13,8 +16,8 @@ jobs:
       - name: Build docker image
         run: docker build -t img-tst .
 
-      - name: Test report URL
-        run: echo http://134.209.192.159/${{ github.run_attempt }}
+      - name: Make test report URL
+        run: echo "http://134.209.192.159/$RUN_ID"
 
       - name: Run tests
-        run: docker run -v /home/report/${{ github.run_attempt }}:/app/report/ -t img-tst:latest
+        run: docker run -v /home/report/$RUN_ID:/app/report/ -t img-tst:latest
