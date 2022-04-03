@@ -12,4 +12,4 @@ jobs:
       - name: Docker build
         run: docker build -t img-tst .
       - name: Run tests
-        run: docker run img-tst .
+        run: docker run img-tst
