@@ -9,8 +9,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Clear results
-        run: rm -r /home/report/*
 
       - name: Build docker image
         run: docker build -t img-tst .
