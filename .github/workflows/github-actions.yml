@@ -1,10 +1,10 @@
-name: ☂ run tests
+name: ☂ api/e2e auto tests
 
 on:
   workflow_dispatch:
 
 jobs:
-   test:
+   tests-execution:
     runs-on: self-hosted
 
     steps:
@@ -13,7 +13,7 @@ jobs:
       - name: Build docker image
         run: docker build -t img-tst .
 
-      - name: Test report
+      - name: Test report URL
         run: echo http://134.209.192.159/${{ github.run_number }}
 
       - name: Run tests
