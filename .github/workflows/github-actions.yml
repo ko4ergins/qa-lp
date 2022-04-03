@@ -9,7 +9,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Docker build
+      - name: Clear results
+        run: rm -r /home/report/*
+      - name: Build docker image
         run: docker build -t img-tst .
       - name: Run tests
-        run: docker run img-tst
+        run: docker run -v /home/report:/app/report/index -t img-tst:latest
