@@ -1,10 +1,10 @@
-name: ☂ run API tests
+name: ☂ run tests
 
 on:
   workflow_dispatch:
 
 jobs:
-   api-test:
+   test:
     runs-on: self-hosted
 
     steps:
