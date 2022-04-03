@@ -1,4 +1,4 @@
-name: ☂ api/e2e auto tests
+name: ☂ api/ui auto tests
 
 on:
   workflow_dispatch:
