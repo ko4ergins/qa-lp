@@ -11,6 +11,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Clear results
         run: rm -r /home/report/*
+        continue-on-error: true
       - name: Build docker image
         run: docker build -t img-tst .
       - name: Run tests
