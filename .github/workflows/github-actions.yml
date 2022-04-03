@@ -10,11 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Prepare report folder
-        run: mkdir /home/report/${{ github.run_id }}
-
       - name: Build docker image
         run: docker build -t img-tst .
 
+      - name: Test report
+        run: echo http://134.209.192.159/${{ github.run_number }}
+
       - name: Run tests
-        run: docker run -v /home/report/${{ github.run_number }}:/app/report/ -t img-tst:latest; echo http://134.209.192.159/${{ github.run_number }}
+        run: docker run -v /home/report/${{ github.run_number }}:/app/report/ -t img-tst:latest
