@@ -5,7 +5,8 @@
    "main": "index.js",
    "scripts": {
       "pretest": "tsc --incremental -p tsconfig.json",
-      "postinstall": "px playwright install chromium",
+      "postinstall": "npx playwright install chromium",
+      "ci": "npm install && npx playwright install chromium",
       "test:api": "npm run test -- --project=API",
       "test:ui": "npm run test -- --project=UI",
       "test": "npx playwright test"
