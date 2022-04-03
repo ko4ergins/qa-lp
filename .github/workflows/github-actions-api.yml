@@ -15,5 +15,5 @@ jobs:
       - name: install dependencies
         run: npm install
       - name: run tests
-        run: npm run test:api
+        run: npm run test
         continue-on-error: true
