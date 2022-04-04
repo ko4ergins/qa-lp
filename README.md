@@ -15,11 +15,14 @@
 
 
 ## How to run TAF locally
-1. npm install
-2.1. npm run test
-2.2. npm run test: api
-2.3. npm run test: ui
-3. Open ./report/index.html for view tests results
+1. Install dependencies:
+   - `npm install`
+2. Run tests 
+   - `npm run test`
+   - `npm run test:api`
+   - `npm run test: ui`
+3. Review report 
+   - `./report/index.html`
 
 ## How to run TAF from CI/CD
 1. Navigate to the GitHub project
