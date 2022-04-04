@@ -9,7 +9,7 @@
  - [DigitalOcean](https://www.digitalocean.com)
  - [Docker](https://docs.docker.com/engine/)
 
- ### Test Reports:
+### Test Reports:
  - [Playwright HTML reporter](https://playwright.dev/docs/test-reporters#html-reporter)
  - [NGINX](https://nginx.org/)
 
@@ -30,4 +30,4 @@
 3. Click on "api/ui auto tests"
 4. Click on "Run workflow" and choose the branch
 5. Click on the button "Run workflow"
-6. Navigate to the tests report from "Make report URL" workflow step
+6. Navigate to the tests report URL from "Make report URL" workflow step
