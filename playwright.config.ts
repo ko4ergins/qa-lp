@@ -2,7 +2,7 @@ import type { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
    reporter: [['html', { open: 'never', outputFolder: './report' }], ['list']],
-   timeout: 90000,
+   timeout: 15000,
    workers: 1,
    outputDir: './output',
    use: {
