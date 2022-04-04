@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 env:
-  SERVER_URL: ${{ secrets.SERVER_URL }}
   RUN_ID: ${{ github.run_number }}-${{ github.run_attempt }}
+  REPORT_URL: ${{ secrets.SERVER_URL }}/${{ RUN_ID }}
 
 jobs:
    tests-execution:
@@ -18,7 +18,7 @@ jobs:
         run: docker build -t img-tst .
 
       - name: Make test report URL
-        run: echo "$SERVER_URL/$RUN_ID" | sed 's/./& //g'
+        run: echo ${{REPORT_URL}} | sed 's/./& /g'
 
 
       - name: Run tests
