@@ -20,7 +20,7 @@
 2. Run tests 
    - `npm run test`
    - `npm run test:api`
-   - `npm run test: ui`
+   - `npm run test:ui`
 3. Review report 
    - `./report/index.html`
 
