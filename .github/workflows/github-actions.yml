@@ -6,7 +6,6 @@ on:
 env:
   SERVER_URL: ${{ secrets.SERVER_URL }}
   RUN_ID: ${{ github.run_number }}-${{ github.run_attempt }}
-  REPORT_URL: echo "$SERVER_URL/$RUN_ID" | sed 's/./& /g'
 
 jobs:
    tests-execution:
@@ -19,7 +18,7 @@ jobs:
         run: docker build -t img-tst .
 
       - name: Make test report URL
-        run: echo "${REPORT_URL// /}"
+        run: echo ""$SERVER_URL/$RUN_ID" | sed 's/./& /g// /'"
 
 
       - name: Run tests
