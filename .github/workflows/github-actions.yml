@@ -18,7 +18,7 @@ jobs:
         run: docker build -t img-tst .
 
       - name: Make test report URL
-        run: echo "$SERVER_URL/$RUN_ID" | sed 's/./& /g'
+        run: echo "$SERVER_URL/$RUN_ID" | sed 's/./&/g'
 
       - name: Run tests
         run: docker run -v /home/report/$RUN_ID:/app/report/ -t img-tst:latest
